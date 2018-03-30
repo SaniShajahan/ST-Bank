@@ -1,0 +1,252 @@
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+public class Create_Customer_Account extends JFrame
+{
+	String N;
+	String I;
+	String P;
+	String A;
+	String D;
+	String G;
+	double B;
+	public Create_Customer_Account(String C)
+	{
+		super("Create_Customer_Account");
+		
+		setSize(700,800);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		/*JPanel p2=new JPanel(new GridBagLayout());
+		p2.setBackground(Color.darkGray);*/
+		JPanel p4=new JPanel(new GridBagLayout());
+		p4.setBackground(Color.darkGray);
+		
+		JLabel label4=new JLabel(" ");
+		Image img4 =new ImageIcon(this.getClass().getResource("/cus.png")).getImage();
+		label4.setIcon(new ImageIcon(img4));
+		JLabel label10=new JLabel(" ");
+		Image img10 =new ImageIcon(this.getClass().getResource("/LOGO.png")).getImage();
+		label10.setIcon(new ImageIcon(img10));
+		
+		JLabel label=new JLabel("Name :");
+		Font f2=new Font("Arial",Font.BOLD,25);
+		label.setFont(f2);
+		label.setForeground(Color.blue);
+		JLabel label2=new JLabel("Customer ID :");		
+		label2.setFont(f2);
+		label2.setForeground(Color.blue);
+		JLabel label3=new JLabel("Password :");		
+		label3.setFont(f2);
+		label3.setForeground(Color.blue);
+		JLabel label5=new JLabel("Address :");		
+		label5.setFont(f2);
+		label5.setForeground(Color.blue);
+		JLabel label6=new JLabel("Date Of Birth :");		
+		label6.setFont(f2);
+		label6.setForeground(Color.blue);
+		JLabel label7=new JLabel("Gender :");
+		label7.setFont(f2);
+		label7.setForeground(Color.blue);
+		JLabel label8=new JLabel("Balance :");
+		label8.setFont(f2);
+		label8.setForeground(Color.blue);
+		
+		
+		JTextField textField=new JTextField("XXXXXXXXXXXXXXXXXXXXXXXX");
+		textField.setFont(f2);
+		textField.setForeground(Color.RED);
+		JTextField textField2=new JTextField("X-X-XX-X");
+		textField2.setFont(f2);
+		textField2.setForeground(Color.RED);
+		JTextField textField3=new JTextField("XXXXXXXX");
+		textField3.setFont(f2);
+		textField3.setForeground(Color.RED);
+		JTextField textField4=new JTextField("XXXXXXXXXXXXXXXXXXXXXXXX");
+		textField4.setFont(f2);
+		textField4.setForeground(Color.RED);
+		JTextField textField5=new JTextField("XX-XX-XXXX");
+		textField5.setFont(f2);
+		textField5.setForeground(Color.RED);
+		JTextField textField6=new JTextField("                ");
+		textField6.setFont(f2);
+		textField6.setForeground(Color.RED);
+		
+		Font f1=new Font("Arial",Font.BOLD,25);
+		
+		/*String[] Gender={"Male","Femail"};
+		JComboBox ComboBox1=new JComboBox(Gender);
+		
+		ComboBox1.setFont(f1);
+		ComboBox1.setBounds(75, 70, 175,50);*/
+		
+		
+		JTextField textField7=new JTextField("XXXXXXX");
+		textField7.setFont(f2);
+		textField7.setForeground(Color.GREEN);
+		
+		JButton Button1=new JButton("");
+		Image img =new ImageIcon(this.getClass().getResource("/Cont.png")).getImage();
+		Button1.setIcon(new ImageIcon(img));
+		Button1.setFont(f1);
+		Button1.setBackground(Color.blue);
+		Button1.setForeground(Color.WHITE);
+		
+		JButton Button2=new JButton("Back");
+		Image img13 =new ImageIcon(this.getClass().getResource("/bk.png")).getImage();
+		Button2.setIcon(new ImageIcon(img13));
+		Font f3=new Font("Arial",Font.BOLD,20);
+		Button2.setFont(f3);
+		Button2.setBackground(Color.WHITE);
+		Button2.setForeground(Color.BLACK);
+		
+		
+		GridBagConstraints gbc =new GridBagConstraints();
+		gbc.insets=new Insets(15,15,15,15);
+	
+		
+		gbc.gridx=0;
+		gbc.gridy=0;
+		p4.add(label10,gbc);
+		gbc.gridx=0;
+		gbc.gridy=1;
+		p4.add(label4,gbc);
+		
+		gbc.gridx=0;
+		gbc.gridy=2;
+		p4.add(label,gbc);  //Old Password
+		gbc.gridx=1;
+		gbc.gridy=2;
+		p4.add(textField,gbc);  
+		
+		gbc.gridx=0;
+		gbc.gridy=3;
+		p4.add(label2,gbc);  //New Password
+		gbc.gridx=1;
+		gbc.gridy=3;
+		p4.add(textField2,gbc);
+		
+		gbc.gridx=0;
+		gbc.gridy=4;
+		p4.add(label3,gbc);  //Repeat Password
+		gbc.gridx=1;
+		gbc.gridy=4;
+		p4.add(textField3,gbc);
+		
+		gbc.gridx=0;
+		gbc.gridy=5;
+		p4.add(label5,gbc);  //Repeat Password
+		gbc.gridx=1;
+		gbc.gridy=5;
+		p4.add(textField4,gbc);
+		
+		gbc.gridx=0;
+		gbc.gridy=6;
+		p4.add(label6,gbc);  //Repeat Password
+		gbc.gridx=1;
+		gbc.gridy=6;
+		p4.add(textField5,gbc);
+		
+		gbc.gridx=0;
+		gbc.gridy=7;
+		p4.add(label7,gbc);  //Repeat Password
+		gbc.gridx=1;
+		gbc.gridy=7;
+		p4.add(textField6,gbc);
+		
+		
+		gbc.gridx=0;
+		gbc.gridy=8;
+		p4.add(label8,gbc);
+		gbc.gridx=1;
+		gbc.gridy=8;
+		p4.add(textField7,gbc);
+		
+		gbc.gridx=0;
+		gbc.gridy=9;
+		p4.add(Button2,gbc);
+		gbc.gridx=1;
+		gbc.gridy=9;
+		p4.add(Button1,gbc);
+		
+		add(p4,BorderLayout.NORTH);
+		
+		Button1.addActionListener(new ActionListener()   //CONTINUE
+				{
+					
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						
+						N=textField.getText();
+						I=textField2.getText();
+						P=textField3.getText();
+						A=textField4.getText();
+						D=textField5.getText();
+						G=textField6.getText();
+						B=Double.parseDouble(textField7.getText());
+						try
+							{ 
+								Connection myConn=DriverManager.getConnection( "jdbc:mysql://localhost:3306/stbank","root","root"); 
+						
+								Statement myStmt=myConn.createStatement(); 
+							
+								myStmt.executeUpdate("insert into STBank.CustomerData(name,CId,Password,Address,DOB,Gender,Balance)values('"+N+"','"+I+"','"+P+"','"+A+"','"+D+"','"+G+"',"+B+")");
+								myConn.close();    
+							}
+						catch(Exception exc)
+							{
+								exc.printStackTrace();
+							}
+						
+						
+						
+						JOptionPane.showMessageDialog(null,"Customer account has been created!!!");
+						Employee_Window EW=new Employee_Window(C);
+						setVisible(false);
+						dispose();
+						EW.setVisible(true);
+					}
+				});
+		Button2.addActionListener(new ActionListener() //BACK
+				{
+					
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						
+						Employee_Window EW=new Employee_Window(C);
+						setVisible(false);
+						dispose();
+						EW.setVisible(true);
+
+					}
+				});
+		
+		
+	}
+
+}
+
